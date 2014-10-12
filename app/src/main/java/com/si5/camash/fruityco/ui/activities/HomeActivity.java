@@ -1,38 +1,42 @@
 package com.si5.camash.fruityco.ui.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.si5.camash.fruityco.R;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements View.OnClickListener {
+
+    private ImageButton playBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        findViews();
+    }
+
+
+    private void findViews() {
+        playBtn = (ImageButton)findViewById( R.id.playBtn );
+
+        playBtn.setOnClickListener( this );
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    public void onClick(View v) {
+        if ( v == playBtn ) {
+            Intent intent=new Intent(this, GameActivity.class);
+            startActivity(intent);
         }
-        return super.onOptionsItemSelected(item);
     }
+
+
 }
