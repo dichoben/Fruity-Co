@@ -25,21 +25,21 @@
             android:id="@+id/img1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/fruit_ananas" />
 
         <ImageView
             android:id="@+id/img2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/fruit_abricot" />
 
         <ImageView
             android:id="@+id/img3"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/fruit_banane" />
     </LinearLayout>
 
