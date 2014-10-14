@@ -2,18 +2,15 @@ package com.si5.camash.fruityco.ui.fragments;
 
 
 import android.content.ClipData;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Constants;
@@ -41,8 +38,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
 
     public static Theme1 newInstance() {
-        Theme1 fragment = new Theme1();
-        return fragment;
+        return new Theme1();
     }
 
     public Theme1() {
@@ -58,9 +54,10 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        /*aliments.add(initRandomVegetable());
         aliments.add(initRandomVegetable());
-        aliments.add(initRandomVegetable());
-        aliments.add(initRandomVegetable());
+        aliments.add(initRandomVegetable());*/
+        addRandomVegetable(3);
 
         positionReponse = getRandomPosition();
 
@@ -142,6 +139,18 @@ public class Theme1 extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void addRandomVegetable(int nb){
+        int i=0;
+        Aliment aliment;
+        while( i<nb ){
+            aliment=initRandomVegetable();
+            if(!aliments.contains(aliment)){
+                aliments.add(initRandomVegetable());
+                i++;
+            }
+        }
+
+    }
     private Aliment initRandomVegetable() {
         int nbrFruit = GameActivity.listFruits.length;
         int nbrLegume = GameActivity.listLegumes.length;
@@ -186,7 +195,6 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
             boolean isDropInside=false;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
