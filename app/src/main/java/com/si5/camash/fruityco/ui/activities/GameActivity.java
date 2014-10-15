@@ -12,9 +12,8 @@ import android.widget.TextView;
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.fragments.Theme1;
+import com.si5.camash.fruityco.ui.fragments.Theme3;
 import com.si5.camash.fruityco.ui.fragments.Theme2;
-
-
 import de.greenrobot.event.EventBus;
 
 public class GameActivity extends Activity {
@@ -33,7 +32,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        changeMainContent(Theme1.newInstance());
+        changeMainContent(Theme3.newInstance());
         findViews();
         EventBus.getDefault().register(this);
     }
