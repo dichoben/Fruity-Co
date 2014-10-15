@@ -19,8 +19,8 @@ import de.greenrobot.event.EventBus;
 public class GameActivity extends Activity {
 
 
-    public static String [] listFruits = {"abricot", "ananas", "banane", "cassis", "cerise", "citron", "fraise", "framboise", "grenade", "kiwi", "litchi", "mangue", "melon", "noix", "noix_de_coco", "orange", "pamplemousse", "pasteque", "peche", "poire", "pomme", "prune", "raisin"};
-    public static String [] listLegumes = {"ail", "artichaut", "asperge", "aubergine", "avocat", "bettrave", "brocoli", "carotte", "chou_fleur", "chou_rouge", "citrouille", "concombre", "courgette", "endive", "haricot", "laitue", "mache", "mais", "oignon", "petit_pois", "poireau", "poivron", "pomme_de_terre", "radis", "tomate"};
+    public static String [] listFruits = {"abricot", "ananas", "banane", "cassis", "cerise", "citron", "fraise", "framboise", "grenade", "kiwi", "litchi", "mangue", "melon", "noix", "noix de coco", "orange", "pamplemousse", "pastèque", "pêche", "poire", "pomme", "prune", "raisin"};
+    public static String [] listLegumes = {"ail", "artichaut", "asperge", "aubergine", "avocat", "betterave", "brocoli", "carotte", "chou fleur", "chou rouge", "citrouille", "concombre", "courgette", "endive", "haricot", "laitue", "mâche", "ma iss", "oignon", "petit pois", "poireau", "poivron", "pomme de terre", "radis", "tomate"};
 
     private int currentLvl=0;
 
@@ -32,7 +32,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        changeMainContent(Theme3.newInstance());
+        changeMainContent(Theme1.newInstance());
         findViews();
         EventBus.getDefault().register(this);
     }
@@ -66,8 +66,9 @@ public class GameActivity extends Activity {
         changeMainContent(Theme1.newInstance());
      } else if(currentLvl>=6 && currentLvl<=10){
          changeMainContent(Theme2.newInstance());
-
      } else if(currentLvl>=11 && currentLvl<=15){
+         changeMainContent(Theme3.newInstance());
+     } else {
 
      }
 
