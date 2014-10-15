@@ -13,15 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.si5.camash.fruityco.R;
-import com.si5.camash.fruityco.Utils.Constants;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
-import com.si5.camash.fruityco.ui.activities.GameActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import static com.si5.camash.fruityco.Utils.Utils.addRandomAliment;
 
 
 public class Theme1 extends Fragment implements View.OnClickListener {
@@ -34,7 +34,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     private ImageView img3;
 
     List<Aliment> aliments = new ArrayList<Aliment>();
-    private int positionReponse;
+    private int positionResponse;
 
 
     public static Theme1 newInstance() {
@@ -54,12 +54,9 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*aliments.add(initRandomVegetable());
-        aliments.add(initRandomVegetable());
-        aliments.add(initRandomVegetable());*/
-        addRandomVegetable(3);
+        aliments=addRandomAliment(3);
 
-        positionReponse = getRandomPosition();
+        positionResponse = getRandomPosition();
 
         ttobj = new TextToSpeech(getActivity(),
                 new TextToSpeech.OnInitListener() {
@@ -111,7 +108,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
         img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
         img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
 
-        switch (positionReponse){
+        switch (positionResponse){
             case 0:
                 img1.setOnDragListener(new MyDragListener());
                 break;
@@ -135,40 +132,12 @@ public class Theme1 extends Fragment implements View.OnClickListener {
         } else if (view == img3) {
 
         } else if (view == imgMain) {
-            ttobj.speak(aliments.get(positionReponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
+            ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 
-    private void addRandomVegetable(int nb){
-        int i=0;
-        Aliment aliment;
-        while( i<nb ){
-            aliment=initRandomVegetable();
-            if(!aliments.contains(aliment)){
-                aliments.add(initRandomVegetable());
-                i++;
-            }
-        }
 
-    }
-    private Aliment initRandomVegetable() {
-        int nbrFruit = GameActivity.listFruits.length;
-        int nbrLegume = GameActivity.listLegumes.length;
-        Aliment aliment = null;
-        Random random = new Random();
-        int r = random.nextInt(2);
-        switch (r) {
-            case Constants.LEGUMES:
-                aliment = new Aliment(GameActivity.listLegumes[random.nextInt(nbrLegume)], Constants.LEGUMES);
-                break;
-            case Constants.FRUIT:
-                aliment = new Aliment(GameActivity.listFruits[random.nextInt(nbrFruit)], Constants.FRUIT);
-                break;
-        }
-        if (aliments.contains(aliment)) return initRandomVegetable();
 
-        return aliment;
-    }
 
     private int getRandomPosition() {
         Random random = new Random();
@@ -178,7 +147,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     private final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                ttobj.speak(aliments.get(positionReponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
+                ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
