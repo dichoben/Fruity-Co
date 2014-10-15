@@ -13,6 +13,7 @@ import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.fragments.Theme1;
 import com.si5.camash.fruityco.ui.fragments.Theme2;
+import com.si5.camash.fruityco.ui.fragments.Theme4_5;
 
 
 import de.greenrobot.event.EventBus;
@@ -33,7 +34,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        changeMainContent(Theme1.newInstance());
+        onEvent(new OnSuccessEvent());
         findViews();
         EventBus.getDefault().register(this);
     }
@@ -68,8 +69,12 @@ public class GameActivity extends Activity {
      } else if(currentLvl>=6 && currentLvl<=10){
          changeMainContent(Theme2.newInstance());
 
-     } else if(currentLvl>=11 && currentLvl<=15){
+     } else if(currentLvl>=11 && currentLvl<=13){
 
+     } else if(currentLvl>=14 && currentLvl<=18){
+         changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
+     } else if(currentLvl>=19 && currentLvl<=23){
+         changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
      }
 
         lvlText.setText("Niveau "+Integer.toString(currentLvl));
