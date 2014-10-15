@@ -57,7 +57,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        aliments=addRandomAliment(3);
+        aliments = addRandomAliment(3);
 
         positionResponse = getRandomPosition();
 
@@ -111,7 +111,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
         img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
         img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
 
-        switch (positionResponse){
+        switch (positionResponse) {
             case 0:
                 img1.setOnDragListener(new MyDragListener());
                 break;
@@ -128,18 +128,18 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == img1) {
+        if (view == img1 && positionResponse == 0) {
+            EventBus.getDefault().post(new OnSuccessEvent());
 
-        } else if (view == img2) {
+        } else if (view == img2 && positionResponse == 1) {
+            EventBus.getDefault().post(new OnSuccessEvent());
 
-        } else if (view == img3) {
+        } else if (view == img3 && positionResponse == 2) {
+            EventBus.getDefault().post(new OnSuccessEvent());
 
         } else if (view == imgMain) {
-            ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
         }
     }
-
-
 
 
     private int getRandomPosition() {
@@ -156,8 +156,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
                 view.startDrag(data, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
         }
@@ -167,7 +166,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
-            boolean isDropInside=false;
+            boolean isDropInside = false;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     break;
@@ -179,7 +178,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
                     EventBus.getDefault().post(new OnSuccessEvent());
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                        imgMain.setVisibility(View.VISIBLE);
+                    imgMain.setVisibility(View.VISIBLE);
                     break;
                 default:
                     break;
