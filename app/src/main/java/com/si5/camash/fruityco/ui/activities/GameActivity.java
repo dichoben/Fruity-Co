@@ -35,8 +35,8 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        onEvent(new OnSuccessEvent());
         findViews();
+        onEvent(new OnSuccessEvent());
         EventBus.getDefault().register(this);
     }
 

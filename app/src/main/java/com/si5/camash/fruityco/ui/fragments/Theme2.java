@@ -133,30 +133,12 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == img1) {
             ttobj.speak(aliments.get(0).getName(), TextToSpeech.QUEUE_FLUSH, null);
-            if(positionResponse == 0) {
-                nbClickRep++;
-                if(nbClickRep==2) {
-                    EventBus.getDefault().post(new OnSuccessEvent());
-                }
-            }
 
         } else if (view == img2) {
             ttobj.speak(aliments.get(1).getName(), TextToSpeech.QUEUE_FLUSH, null);
-            if(positionResponse == 1) {
-                nbClickRep++;
-                if(nbClickRep==2) {
-                    EventBus.getDefault().post(new OnSuccessEvent());
-                }
-            }
 
         } else if (view == img3) {
             ttobj.speak(aliments.get(2).getName(), TextToSpeech.QUEUE_FLUSH, null);
-            if(positionResponse == 2) {
-                nbClickRep++;
-                if(nbClickRep==2) {
-                    EventBus.getDefault().post(new OnSuccessEvent());
-                }
-            }
         } else if (view == imgMain) {
 
         }

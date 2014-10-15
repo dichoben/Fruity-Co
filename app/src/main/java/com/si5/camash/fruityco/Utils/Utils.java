@@ -19,15 +19,10 @@ public class Utils {
 
     public static Drawable getResId(Context context, String variableName, int type) {
         String name = variableName;
-        name = name.replace(' ', '_');
         name = name.replace("ma iss", "mais");
+        name = name.replace(' ', '_');
         name = name.replace('ê', 'e');
         name = name.replace('è', 'e');
-        name = name.replace('é', 'e');
-        name = name.replace("euh", "e");
-        name = name.replace("ii", "i");
-        name = name.replace('ï', 'i');
-        name = name.replace("aa", "a");
         name = name.replace('â', 'a');
         Resources resources = context.getResources();
         final int resourceId = resources.getIdentifier(((type==Constants.FRUIT)?"fruit_": "legume_")+name, "drawable",
