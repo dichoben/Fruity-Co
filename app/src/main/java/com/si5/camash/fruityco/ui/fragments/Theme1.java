@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -156,7 +157,11 @@ public class Theme1 extends Fragment implements View.OnClickListener {
                 view.startDrag(data, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 return true;
-            } else {
+            } else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                imgMain.setVisibility(View.VISIBLE);
+                return true;
+            }
+            else {
                 return false;
             }
         }
