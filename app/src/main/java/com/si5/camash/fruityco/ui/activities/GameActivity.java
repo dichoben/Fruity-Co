@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.fragments.Theme1;
+import com.si5.camash.fruityco.ui.fragments.Theme2;
 
 
 import de.greenrobot.event.EventBus;
@@ -65,6 +66,7 @@ public class GameActivity extends Activity {
      if(currentLvl>=1 && currentLvl<=5){
         changeMainContent(Theme1.newInstance());
      } else if(currentLvl>=6 && currentLvl<=10){
+         changeMainContent(Theme2.newInstance());
 
      } else if(currentLvl>=11 && currentLvl<=15){
 
