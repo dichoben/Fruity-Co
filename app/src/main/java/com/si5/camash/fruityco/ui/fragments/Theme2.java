@@ -38,6 +38,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
 
     List<Aliment> aliments = new ArrayList<Aliment>();
     private int positionResponse;
+    private int nbClickRep;
 
 
     public static Theme2 newInstance() {
@@ -58,6 +59,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         aliments = addRandomAliment(3);
+        nbClickRep = 0;
 
         positionResponse = getRandomPosition();
 
@@ -132,21 +134,28 @@ public class Theme2 extends Fragment implements View.OnClickListener {
         if (view == img1) {
             ttobj.speak(aliments.get(0).getName(), TextToSpeech.QUEUE_FLUSH, null);
             if(positionResponse == 0) {
-                EventBus.getDefault().post(new OnSuccessEvent());
+                if(++nbClickRep==2) {
+                    EventBus.getDefault().post(new OnSuccessEvent());
+                }
             }
 
         } else if (view == img2) {
             ttobj.speak(aliments.get(1).getName(), TextToSpeech.QUEUE_FLUSH, null);
             if(positionResponse == 1) {
-                EventBus.getDefault().post(new OnSuccessEvent());
+                if(++nbClickRep==2) {
+                    EventBus.getDefault().post(new OnSuccessEvent());
+                }
             }
 
         } else if (view == img3) {
             ttobj.speak(aliments.get(2).getName(), TextToSpeech.QUEUE_FLUSH, null);
-            if(positionResponse == 2) {
-                EventBus.getDefault().post(new OnSuccessEvent());
+            if(positionResponse == 0) {
+                if(++nbClickRep==2) {
+                    EventBus.getDefault().post(new OnSuccessEvent());
+                }
             }
         } else if (view == imgMain) {
+            ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 
@@ -164,6 +173,9 @@ public class Theme2 extends Fragment implements View.OnClickListener {
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
+                return true;
+            } else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                imgMain.setVisibility(View.VISIBLE);
                 return true;
             } else {
                 return false;
