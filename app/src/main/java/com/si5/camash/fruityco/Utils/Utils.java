@@ -31,14 +31,22 @@ public class Utils {
         Aliment aliment;
         while( i<nb ){
             aliment=initRandomAliment();
-            if(!aliments.contains(aliment)){
-                aliments.add(initRandomAliment());
+            if(!contains(aliments,aliment)){
+                aliments.add(aliment);
                 i++;
             }
         }
 
         return aliments;
 
+    }
+
+    private static boolean contains(List<Aliment> aliments, Aliment aliment){
+        for(Aliment a:aliments){
+            if(a.getName().equals(aliment.getName())) return true;
+
+        }
+        return false;
     }
 
     public static Aliment initRandomAliment() {

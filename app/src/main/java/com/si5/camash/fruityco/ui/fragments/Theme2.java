@@ -5,7 +5,6 @@ import android.content.ClipData;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,7 +27,7 @@ import de.greenrobot.event.EventBus;
 import static com.si5.camash.fruityco.Utils.Utils.addRandomAliment;
 
 
-public class Theme1 extends Fragment implements View.OnClickListener {
+public class Theme2 extends Fragment implements View.OnClickListener {
 
 
     private TextToSpeech ttobj;
@@ -41,11 +40,11 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     private int positionResponse;
 
 
-    public static Theme1 newInstance() {
-        return new Theme1();
+    public static Theme2 newInstance() {
+        return new Theme2();
     }
 
-    public Theme1() {
+    public Theme2() {
         // Required empty public constructor
     }
 
@@ -72,7 +71,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
                     }
                 });
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_theme1, container, false);
+        View v = inflater.inflate(R.layout.fragment_theme2, container, false);
         findViews(v);
         return v;
     }
@@ -108,9 +107,10 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     }
 
     private void populate() {
-        img1.setImageDrawable(Utils.getResId(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
-        img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
-        img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
+        //img1.setImageDrawable(Utils.getResId(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
+        //img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
+        //img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
+        imgMain.setImageDrawable(Utils.getResId(getActivity(), aliments.get(positionResponse).getName(), aliments.get(positionResponse).getType()));
 
         switch (positionResponse) {
             case 0:
@@ -129,15 +129,23 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == img1 && positionResponse == 0) {
-            EventBus.getDefault().post(new OnSuccessEvent());
+        if (view == img1) {
+            ttobj.speak(aliments.get(0).getName(), TextToSpeech.QUEUE_FLUSH, null);
+            if(positionResponse == 0) {
+                EventBus.getDefault().post(new OnSuccessEvent());
+            }
 
-        } else if (view == img2 && positionResponse == 1) {
-            EventBus.getDefault().post(new OnSuccessEvent());
+        } else if (view == img2) {
+            ttobj.speak(aliments.get(1).getName(), TextToSpeech.QUEUE_FLUSH, null);
+            if(positionResponse == 1) {
+                EventBus.getDefault().post(new OnSuccessEvent());
+            }
 
-        } else if (view == img3 && positionResponse == 2) {
-            EventBus.getDefault().post(new OnSuccessEvent());
-
+        } else if (view == img3) {
+            ttobj.speak(aliments.get(2).getName(), TextToSpeech.QUEUE_FLUSH, null);
+            if(positionResponse == 2) {
+                EventBus.getDefault().post(new OnSuccessEvent());
+            }
         } else if (view == imgMain) {
         }
     }
@@ -151,17 +159,13 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     private final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
+                //ttobj.speak(aliments.get(positionResponse).getName(), TextToSpeech.QUEUE_FLUSH, null);
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 return true;
-            } else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                imgMain.setVisibility(View.VISIBLE);
-                return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
