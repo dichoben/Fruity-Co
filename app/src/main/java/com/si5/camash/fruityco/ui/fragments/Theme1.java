@@ -15,11 +15,14 @@ import android.widget.ImageView;
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
+import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import de.greenrobot.event.EventBus;
 
 import static com.si5.camash.fruityco.Utils.Utils.addRandomAliment;
 
@@ -173,13 +176,10 @@ public class Theme1 extends Fragment implements View.OnClickListener {
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
+                    EventBus.getDefault().post(new OnSuccessEvent());
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(event.getResult()){
-
-                    }else{
                         imgMain.setVisibility(View.VISIBLE);
-                    }
                     break;
                 default:
                     break;
