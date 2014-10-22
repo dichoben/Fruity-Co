@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.widget.TextView;
 
 import com.si5.camash.fruityco.R;
+import com.si5.camash.fruityco.data.events.OnFailEvent;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.fragments.Theme1;
 import com.si5.camash.fruityco.ui.fragments.Theme3;
@@ -30,6 +31,8 @@ public class GameActivity extends Activity {
     private TextView lvlText;
 
     private Handler handler = new Handler();
+
+    private int statistic[] = {0, 0, 0, 0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,11 @@ public class GameActivity extends Activity {
 
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
-            changeMainContent(Theme1.newInstance());
+            //changeMainContent(Theme1.newInstance());
+            changeMainContent(Theme2.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             changeMainContent(Theme2.newInstance());
+            //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
 
         } else if (currentLvl >= 11 && currentLvl <= 13) {
             changeMainContent(Theme3.newInstance());
@@ -78,7 +83,8 @@ public class GameActivity extends Activity {
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
         }
 
-        lvlText.setText("Niveau " + Integer.toString(currentLvl));
+        //lvlText.setText("Niveau " + Integer.toString(currentLvl));
+        //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]+" "+statistic[1]+" "+statistic[3]+" "+statistic[4]);
 
     }
 
@@ -94,5 +100,22 @@ public class GameActivity extends Activity {
         }, 1500);
     }
 
+    public void onEvent(OnFailEvent event){
+        if (currentLvl >= 0 && currentLvl <= 5) {
+            statistic[0]++;
+        } else if (currentLvl >= 6 && currentLvl <= 10) {
+            statistic[1]++;
+        } else if (currentLvl >= 11 && currentLvl <= 13) {
+            statistic[2]++;
+        } else if (currentLvl >= 14 && currentLvl <= 18) {
+            statistic[3]++;
+        } else if (currentLvl >= 19 && currentLvl <= 23) {
+            statistic[4]++;
+        } else {
+            statistic[5]++;
+        }
+        //event.addTentative();
+        //statistic[currentLvl] = event.getTentative();
+    }
 
 }

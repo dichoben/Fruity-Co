@@ -17,6 +17,7 @@ import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
+import com.si5.camash.fruityco.data.events.MyFailDragListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,20 +116,29 @@ public class Theme1 extends Fragment implements View.OnClickListener {
         switch (positionResponse) {
             case 0:
                 img1.setOnDragListener(new MyDragListener());
+
+                img2.setOnDragListener(new MyFailDragListener());
+                img3.setOnDragListener(new MyFailDragListener());
                 break;
             case 1:
                 img2.setOnDragListener(new MyDragListener());
+
+                img1.setOnDragListener(new MyFailDragListener());
+                img3.setOnDragListener(new MyFailDragListener());
                 break;
             case 2:
                 img3.setOnDragListener(new MyDragListener());
+
+                img1.setOnDragListener(new MyFailDragListener());
+                img2.setOnDragListener(new MyFailDragListener());
                 break;
 
         }
     }
 
-
     @Override
     public void onClick(View view) {
+    /*
         if (view == img1 && positionResponse == 0) {
             EventBus.getDefault().post(new OnSuccessEvent());
 
@@ -140,6 +150,7 @@ public class Theme1 extends Fragment implements View.OnClickListener {
 
         } else if (view == imgMain) {
         }
+    */
     }
 
 
@@ -191,5 +202,4 @@ public class Theme1 extends Fragment implements View.OnClickListener {
             return true;
         }
     }
-
 }

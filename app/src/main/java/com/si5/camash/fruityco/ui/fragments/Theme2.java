@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
+import com.si5.camash.fruityco.data.events.MyFailDragListener;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
 
     List<Aliment> aliments = new ArrayList<Aliment>();
     private int positionResponse;
-    private int nbClickRep;
+    //private int nbClickRep;
 
 
     public static Theme2 newInstance() {
@@ -59,7 +60,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         aliments = addRandomAliment(3);
-        nbClickRep = 0;
+        //nbClickRep = 0;
 
         positionResponse = getRandomPosition();
 
@@ -109,20 +110,26 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     }
 
     private void populate() {
-        //img1.setImageDrawable(Utils.getResId(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
-        //img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
-        //img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
         imgMain.setImageDrawable(Utils.getResId(getActivity(), aliments.get(positionResponse).getName(), aliments.get(positionResponse).getType()));
 
         switch (positionResponse) {
             case 0:
                 img1.setOnDragListener(new MyDragListener());
+
+                img2.setOnDragListener(new MyFailDragListener());
+                img3.setOnDragListener(new MyFailDragListener());
                 break;
             case 1:
                 img2.setOnDragListener(new MyDragListener());
+
+                img1.setOnDragListener(new MyFailDragListener());
+                img3.setOnDragListener(new MyFailDragListener());
                 break;
             case 2:
                 img3.setOnDragListener(new MyDragListener());
+
+                img1.setOnDragListener(new MyFailDragListener());
+                img2.setOnDragListener(new MyFailDragListener());
                 break;
 
         }
