@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.widget.TextView;
 
 import com.si5.camash.fruityco.R;
+import com.si5.camash.fruityco.data.events.OnFailEvent;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.fragments.Theme1;
 import com.si5.camash.fruityco.ui.fragments.Theme3;
@@ -30,6 +31,8 @@ public class GameActivity extends Activity {
     private TextView lvlText;
 
     private Handler handler = new Handler();
+
+    private int statistic[] = {0, 0, 0, 0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class GameActivity extends Activity {
         }
 
         lvlText.setText("Niveau " + Integer.toString(currentLvl));
+        //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]);
 
     }
 
@@ -94,5 +98,22 @@ public class GameActivity extends Activity {
         }, 1500);
     }
 
+    public void onEvent(OnFailEvent event){
+        if (currentLvl >= 0 && currentLvl <= 5) {
+            statistic[0]++;
+        } else if (currentLvl >= 6 && currentLvl <= 10) {
+            statistic[1]++;
+        } else if (currentLvl >= 11 && currentLvl <= 13) {
+            statistic[2]++;
+        } else if (currentLvl >= 14 && currentLvl <= 18) {
+            statistic[3]++;
+        } else if (currentLvl >= 19 && currentLvl <= 23) {
+            statistic[4]++;
+        } else {
+            statistic[5]++;
+        }
+        //event.addTentative();
+        //statistic[currentLvl] = event.getTentative();
+    }
 
 }
