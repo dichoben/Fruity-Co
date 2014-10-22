@@ -3,10 +3,8 @@ package com.si5.camash.fruityco.ui.fragments;
 
 import android.app.Fragment;
 import android.content.ClipData;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +17,7 @@ import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
+import com.si5.camash.fruityco.ui.views.DrawView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,10 @@ public class Theme3 extends Fragment implements View.OnClickListener {
     private static final int NB_FRUIT_VEGETABLE = 5;
     private TextToSpeech ttobj;
     private ImageView []imgMain1 = new ImageView[NB_FRUIT_VEGETABLE];
-    private ImageView []img1 = new ImageView[NB_FRUIT_VEGETABLE];;
+    private ImageView []img1 = new ImageView[NB_FRUIT_VEGETABLE];
+    private DrawView drawView;
+    private LinearLayout layoutImgMain;
+    private LinearLayout layoutImg;
 
     List<Aliment> aliments = new ArrayList<Aliment>();
     private int [] positionResponse = new int[NB_FRUIT_VEGETABLE];
@@ -58,6 +60,9 @@ public class Theme3 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_theme3, container, false);
+
         aliments=addRandomAliment(NB_FRUIT_VEGETABLE);
         for (int i=0; i<NB_FRUIT_VEGETABLE; i++){
             do {
@@ -77,8 +82,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     }
                 });
 
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_theme3, container, false);
+
         findViews(v);
         return v;
     }
@@ -114,6 +118,9 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         img1[3] = (ImageView) v.findViewById(R.id.img4);
         imgMain1[4] = (ImageView) v.findViewById(R.id.imgMain5);
         img1[4] = (ImageView) v.findViewById(R.id.img5);
+        drawView = (DrawView) v.findViewById(R.id.drawView);
+        layoutImg = (LinearLayout)v.findViewById(R.id.layoutImg);
+        layoutImgMain = (LinearLayout)v.findViewById(R.id.layoutImgMain);
 
         // Sets a long click listener for the ImageView using an anonymous listener object that
         // implements the OnLongClickListener interface
@@ -204,14 +211,16 @@ public class Theme3 extends Fragment implements View.OnClickListener {
             boolean isDropInside=false;
                 if(v==img1[positionResponse[onMovement]] && event.getAction()==DragEvent.ACTION_DROP){
                     nbFounded++;
-                    float xImageMain = imgMain1[onMovement].getX();
-                    float yImageMain = imgMain1[onMovement].getY();
-                    float xImage = img1[positionResponse[onMovement]].getX();
-                    float yImage = img1[positionResponse[onMovement]].getY();
+                    float xImageMain = imgMain1[onMovement].getX()+imgMain1[onMovement].getWidth()/2;
+                    float yImageMain = layoutImgMain.getY()+layoutImgMain.getHeight();
+                    float xImage = img1[positionResponse[onMovement]].getX()+img1[positionResponse[onMovement]].getWidth()/2;
+                    float yImage = layoutImg.getY();
                     
                     if(nbFounded == 5) {
                         EventBus.getDefault().post(new OnSuccessEvent());
                     }
+                    imgMain1[onMovement].setOnTouchListener(null);
+                    drawView.drawLine(xImageMain,yImageMain,xImage,yImage);
                 } else if (event.getAction()==DragEvent.ACTION_DRAG_ENDED){
                     imgMain1[onMovement].setVisibility(View.VISIBLE);
                 }
