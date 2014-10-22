@@ -35,7 +35,6 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     private ImageView imgMain;
     private ImageView img1;
     private ImageView img2;
-    private ImageView img3;
 
     List<Aliment> aliments = new ArrayList<Aliment>();
     private int positionResponse;
@@ -59,7 +58,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        aliments = addRandomAliment(3);
+        aliments = addRandomAliment(2);
         //nbClickRep = 0;
 
         positionResponse = getRandomPosition();
@@ -94,12 +93,10 @@ public class Theme2 extends Fragment implements View.OnClickListener {
         imgMain = (ImageView) v.findViewById(R.id.imgMain);
         img1 = (ImageView) v.findViewById(R.id.img1);
         img2 = (ImageView) v.findViewById(R.id.img2);
-        img3 = (ImageView) v.findViewById(R.id.img3);
 
         imgMain.setOnClickListener(this);
         img1.setOnClickListener(this);
         img2.setOnClickListener(this);
-        img3.setOnClickListener(this);
 
         // Sets a long click listener for the ImageView using an anonymous listener object that
         // implements the OnLongClickListener interface
@@ -115,21 +112,11 @@ public class Theme2 extends Fragment implements View.OnClickListener {
         switch (positionResponse) {
             case 0:
                 img1.setOnDragListener(new MyDragListener());
-
                 img2.setOnDragListener(new MyFailDragListener());
-                img3.setOnDragListener(new MyFailDragListener());
                 break;
             case 1:
                 img2.setOnDragListener(new MyDragListener());
-
                 img1.setOnDragListener(new MyFailDragListener());
-                img3.setOnDragListener(new MyFailDragListener());
-                break;
-            case 2:
-                img3.setOnDragListener(new MyDragListener());
-
-                img1.setOnDragListener(new MyFailDragListener());
-                img2.setOnDragListener(new MyFailDragListener());
                 break;
 
         }
@@ -144,8 +131,6 @@ public class Theme2 extends Fragment implements View.OnClickListener {
         } else if (view == img2) {
             ttobj.speak(aliments.get(1).getName(), TextToSpeech.QUEUE_FLUSH, null);
 
-        } else if (view == img3) {
-            ttobj.speak(aliments.get(2).getName(), TextToSpeech.QUEUE_FLUSH, null);
         } else if (view == imgMain) {
 
         }

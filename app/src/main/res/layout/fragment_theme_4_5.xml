@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:textSize="40sp"
                 android:textColor="@android:color/white"
-                android:text="Fruit"/>
+                android:text="Fruits"/>
 
         </LinearLayout>
 

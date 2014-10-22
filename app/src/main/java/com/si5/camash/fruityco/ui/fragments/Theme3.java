@@ -31,7 +31,7 @@ import static com.si5.camash.fruityco.Utils.Utils.addRandomAliment;
 
 public class Theme3 extends Fragment implements View.OnClickListener {
 
-    private static final int NB_FRUIT_VEGETABLE = 5;
+    private static final int NB_FRUIT_VEGETABLE = 3;
     private TextToSpeech ttobj;
     private List<ImageView> imgMain1 = new ArrayList<ImageView>();
     private List<ImageView> img1 = new ArrayList<ImageView>();
@@ -114,10 +114,6 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         img1.add((ImageView) v.findViewById(R.id.img2));
         imgMain1.add((ImageView) v.findViewById(R.id.imgMain3));
         img1.add((ImageView) v.findViewById(R.id.img3));
-        imgMain1.add((ImageView) v.findViewById(R.id.imgMain4));
-        img1.add((ImageView) v.findViewById(R.id.img4));
-        imgMain1.add((ImageView) v.findViewById(R.id.imgMain5));
-        img1.add((ImageView) v.findViewById(R.id.img5));
         drawView = (DrawView) v.findViewById(R.id.drawView);
         layoutImg = (LinearLayout)v.findViewById(R.id.layoutImg);
         layoutImgMain = (LinearLayout)v.findViewById(R.id.layoutImgMain);
@@ -200,7 +196,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     float xImage = img1.get(positionResponse[onMovement]).getX()+img1.get(positionResponse[onMovement]).getWidth()/2;
                     float yImage = layoutImg.getY();
 
-                    if(nbFounded == 5) {
+                    if(nbFounded == 3) {
                         EventBus.getDefault().post(new OnSuccessEvent());
                     }
                     imgMain1.get(onMovement).setOnTouchListener(null);

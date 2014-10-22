@@ -49,22 +49,6 @@
                 android:layout_weight="1"
                 android:src="@drawable/sound_selector" />
 
-            <ImageView
-                android:id="@+id/imgMain4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:src="@drawable/sound_selector" />
-
-            <ImageView
-                android:id="@+id/imgMain5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:src="@drawable/sound_selector" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -92,20 +76,6 @@
 
             <ImageView
                 android:id="@+id/img3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/fruit_banane" />
-
-            <ImageView
-                android:id="@+id/img4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/fruit_banane" />
-
-            <ImageView
-                android:id="@+id/img5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
