@@ -5,7 +5,6 @@ import android.content.ClipData;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -108,9 +107,9 @@ public class Theme1 extends Fragment implements View.OnClickListener {
     }
 
     private void populate() {
-        img1.setImageDrawable(Utils.getResId(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
-        img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
-        img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
+        img1.setImageDrawable(Utils.getRes(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
+        img2.setImageDrawable(Utils.getRes(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
+        img3.setImageDrawable(Utils.getRes(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
 
         switch (positionResponse) {
             case 0:

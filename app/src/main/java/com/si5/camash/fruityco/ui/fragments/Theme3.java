@@ -33,8 +33,8 @@ public class Theme3 extends Fragment implements View.OnClickListener {
 
     private static final int NB_FRUIT_VEGETABLE = 5;
     private TextToSpeech ttobj;
-    private ImageView []imgMain1 = new ImageView[NB_FRUIT_VEGETABLE];
-    private ImageView []img1 = new ImageView[NB_FRUIT_VEGETABLE];
+    private List<ImageView> imgMain1 = new ArrayList<ImageView>();
+    private List<ImageView> img1 = new ArrayList<ImageView>();
     private DrawView drawView;
     private LinearLayout layoutImgMain;
     private LinearLayout layoutImg;
@@ -108,72 +108,53 @@ public class Theme3 extends Fragment implements View.OnClickListener {
 
 
     private void findViews(View v) {
-        imgMain1[0] = (ImageView) v.findViewById(R.id.imgMain1);
-        img1[0] = (ImageView) v.findViewById(R.id.img1);
-        imgMain1[1] = (ImageView) v.findViewById(R.id.imgMain2);
-        img1[1] = (ImageView) v.findViewById(R.id.img2);
-        imgMain1[2] = (ImageView) v.findViewById(R.id.imgMain3);
-        img1[2] = (ImageView) v.findViewById(R.id.img3);
-        imgMain1[3] = (ImageView) v.findViewById(R.id.imgMain4);
-        img1[3] = (ImageView) v.findViewById(R.id.img4);
-        imgMain1[4] = (ImageView) v.findViewById(R.id.imgMain5);
-        img1[4] = (ImageView) v.findViewById(R.id.img5);
+        imgMain1.add((ImageView) v.findViewById(R.id.imgMain1));
+        img1.add((ImageView) v.findViewById(R.id.img1));
+        imgMain1.add((ImageView) v.findViewById(R.id.imgMain2));
+        img1.add((ImageView) v.findViewById(R.id.img2));
+        imgMain1.add((ImageView) v.findViewById(R.id.imgMain3));
+        img1.add((ImageView) v.findViewById(R.id.img3));
+        imgMain1.add((ImageView) v.findViewById(R.id.imgMain4));
+        img1.add((ImageView) v.findViewById(R.id.img4));
+        imgMain1.add((ImageView) v.findViewById(R.id.imgMain5));
+        img1.add((ImageView) v.findViewById(R.id.img5));
         drawView = (DrawView) v.findViewById(R.id.drawView);
         layoutImg = (LinearLayout)v.findViewById(R.id.layoutImg);
         layoutImgMain = (LinearLayout)v.findViewById(R.id.layoutImgMain);
 
         // Sets a long click listener for the ImageView using an anonymous listener object that
         // implements the OnLongClickListener interface
-        for (int i=0; i<NB_FRUIT_VEGETABLE; i++) {
-            imgMain1[i].setOnClickListener(this);
-            //img1[i].setOnClickListener(this);
-            imgMain1[i].setOnTouchListener(new MyTouchListener());
+        for(ImageView img:imgMain1){
+            img.setOnClickListener(this);
+            img.setOnTouchListener(new MyTouchListener());
         }
 
         populate();
     }
 
     private void populate() {
-        for (int i=0; i<NB_FRUIT_VEGETABLE; i++) {
-            img1[i].setImageDrawable(Utils.getResId(getActivity(), aliments.get(i).getName(), aliments.get(i).getType()));
-            img1[i].setOnDragListener(new MyDragListener());
-            imgMain1[i].setOnDragListener(new MyDragListener());
+        int i=0;
+        for(ImageView img:img1){
+            img.setImageDrawable(Utils.getRes(getActivity(), aliments.get(i).getName(), aliments.get(i).getType()));
+            img.setOnDragListener(new MyDragListener());
+            i++;
         }
 
-        //img1[positionResponse].setOnDragListener(new MyDragListener());
-
-        /*switch (positionResponse){
-            case 0:
-                img1.setOnDragListener(new MyDragListener());
-                break;
-            case 1:
-                img2.setOnDragListener(new MyDragListener());
-                break;
-            case 2:
-                img3.setOnDragListener(new MyDragListener());
-                break;
-
-        }*/
     }
 
 
     @Override
     public void onClick(View view) {
-        /*
-        if (view == img1) {
-
-        } else if (view == img2) {
-
-        } else if (view == img3) {
-
-        } else if (view == imgMain) {*/
-            for(int i=0; i<NB_FRUIT_VEGETABLE; i++){
-                if (view == imgMain1[i]){
-                    ttobj.speak(aliments.get(positionResponse[i]).getName(), TextToSpeech.QUEUE_FLUSH, null);
-                    break;
-                }
+        int i=0;
+        for(ImageView img:imgMain1){
+            if(img==view){
+                ttobj.speak(aliments.get(positionResponse[i]).getName(), TextToSpeech.QUEUE_FLUSH, null);
+                break;
             }
-        //}
+        }
+        i++;
+
+
     }
 
 
@@ -186,8 +167,10 @@ public class Theme3 extends Fragment implements View.OnClickListener {
 
     private final class MyTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            for(int i=0; i<NB_FRUIT_VEGETABLE; i++) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && view == imgMain1[i]) {
+
+            int i=0;
+            for(ImageView img:imgMain1){
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && view == img) {
                     ttobj.speak(aliments.get(positionResponse[i]).getName(), TextToSpeech.QUEUE_FLUSH, null);
                     ClipData data = ClipData.newPlainText("", "");
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
@@ -195,10 +178,11 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     view.setVisibility(View.INVISIBLE);
                     onMovement = i;
                     return true;
-                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP && view == imgMain1[i]){
-                    imgMain1[i].setVisibility(View.VISIBLE);
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP && view == img){
+                    img.setVisibility(View.VISIBLE);
                     return true;
                 }
+                i++;
             }
             return false;
         }
@@ -209,20 +193,20 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         @Override
         public boolean onDrag(View v, DragEvent event) {
             boolean isDropInside=false;
-                if(v==img1[positionResponse[onMovement]] && event.getAction()==DragEvent.ACTION_DROP){
+                if(v==img1.get(positionResponse[onMovement]) && event.getAction()==DragEvent.ACTION_DROP){
                     nbFounded++;
-                    float xImageMain = imgMain1[onMovement].getX()+imgMain1[onMovement].getWidth()/2;
-                    float yImageMain = layoutImgMain.getY()+layoutImgMain.getHeight();
-                    float xImage = img1[positionResponse[onMovement]].getX()+img1[positionResponse[onMovement]].getWidth()/2;
+                    float xImageMain = imgMain1.get(onMovement).getX()+imgMain1.get(onMovement).getWidth()/2;
+                    float yImageMain = layoutImgMain.getY()+layoutImgMain.getHeight()/2;
+                    float xImage = img1.get(positionResponse[onMovement]).getX()+img1.get(positionResponse[onMovement]).getWidth()/2;
                     float yImage = layoutImg.getY();
 
                     if(nbFounded == 5) {
                         EventBus.getDefault().post(new OnSuccessEvent());
                     }
-                    imgMain1[onMovement].setOnTouchListener(null);
+                    imgMain1.get(onMovement).setOnTouchListener(null);
                     drawView.drawLine(xImageMain,yImageMain,xImage,yImage);
                 } else if (event.getAction()==DragEvent.ACTION_DRAG_ENDED){
-                    imgMain1[onMovement].setVisibility(View.VISIBLE);
+                    imgMain1.get(onMovement).setVisibility(View.VISIBLE);
                 }
             return true;
         }

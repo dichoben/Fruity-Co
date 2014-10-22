@@ -109,10 +109,7 @@ public class Theme2 extends Fragment implements View.OnClickListener {
     }
 
     private void populate() {
-        //img1.setImageDrawable(Utils.getResId(getActivity(), aliments.get(0).getName(), aliments.get(0).getType()));
-        //img2.setImageDrawable(Utils.getResId(getActivity(), aliments.get(1).getName(), aliments.get(1).getType()));
-        //img3.setImageDrawable(Utils.getResId(getActivity(), aliments.get(2).getName(), aliments.get(2).getType()));
-        imgMain.setImageDrawable(Utils.getResId(getActivity(), aliments.get(positionResponse).getName(), aliments.get(positionResponse).getType()));
+        imgMain.setImageDrawable(Utils.getRes(getActivity(), aliments.get(positionResponse).getName(), aliments.get(positionResponse).getType()));
 
         switch (positionResponse) {
             case 0:

@@ -17,7 +17,7 @@ import java.util.Random;
 public class Utils {
 
 
-    public static Drawable getResId(Context context, String variableName, int type) {
+    public static Drawable getRes(Context context, String variableName, int type) {
         String name = variableName;
         name = name.replace("ma iss", "mais");
         name = name.replace(' ', '_');
@@ -30,6 +30,21 @@ public class Utils {
         return resources.getDrawable(resourceId);
 
     }
+
+    public static int getResId(Context context, String variableName, int type) {
+        String name = variableName;
+        name = name.replace("ma iss", "mais");
+        name = name.replace(' ', '_');
+        name = name.replace('ê', 'e');
+        name = name.replace('è', 'e');
+        name = name.replace('â', 'a');
+        Resources resources = context.getResources();
+        return resources.getIdentifier(((type==Constants.FRUIT)?"fruit_": "legume_")+name, "drawable",
+                context.getPackageName());
+
+    }
+
+
 
     public static List<Aliment> addRandomAliment(int nb){
         int i=0;
@@ -70,5 +85,20 @@ public class Utils {
                 break;
         }
         return aliment;
+    }
+
+    public static List<Integer> getAllRes(Context context, int type){
+        List<Integer> reslt=new ArrayList<Integer>();
+        if(type==Constants.FRUIT){
+            for(int i=0;i<GameActivity.listFruits.length;i++){
+                reslt.add(getResId(context, GameActivity.listFruits[i], Constants.FRUIT));
+            }
+        }else{
+            for(int i=0;i<GameActivity.listLegumes.length;i++){
+                reslt.add(getResId(context, GameActivity.listLegumes[i], Constants.LEGUMES));
+            }
+        }
+
+        return reslt;
     }
 }

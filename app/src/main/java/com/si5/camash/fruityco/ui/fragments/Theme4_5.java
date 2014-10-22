@@ -114,7 +114,7 @@ public class Theme4_5 extends Fragment implements View.OnClickListener {
 
     private void populate() {
         if (theme == THEME4) {
-            imgMain.setImageDrawable(Utils.getResId(getActivity(), aliment.getName(), aliment.getType()));
+            imgMain.setImageDrawable(Utils.getRes(getActivity(), aliment.getName(), aliment.getType()));
         }
         fruits.setOnDragListener(new MyDragListener());
         legumes.setOnDragListener(new MyDragListener());
