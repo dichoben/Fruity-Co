@@ -16,6 +16,7 @@ import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Constants;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
+import com.si5.camash.fruityco.data.events.MyFailDragListener;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 
 
@@ -116,21 +117,30 @@ public class Theme4_5 extends Fragment implements View.OnClickListener {
         if (theme == THEME4) {
             imgMain.setImageDrawable(Utils.getRes(getActivity(), aliment.getName(), aliment.getType()));
         }
-        fruits.setOnDragListener(new MyDragListener());
-        legumes.setOnDragListener(new MyDragListener());
+
+        if (aliment.getType() == Constants.FRUIT) {
+            fruits.setOnDragListener(new MyDragListener());
+            legumes.setOnDragListener(new MyFailDragListener());
+        } else { //aliment.getType() == Constants.LEGUMES
+            legumes.setOnDragListener(new MyDragListener());
+            fruits.setOnDragListener(new MyFailDragListener());
+        }
 
     }
 
 
     @Override
     public void onClick(View view) {
+        /*
         if (view == fruits && aliment.getType() == Constants.FRUIT) {
-            EventBus.getDefault().post(new OnSuccessEvent());
+            //EventBus.getDefault().post(new OnSuccessEvent());
 
         } else if (view == legumes && aliment.getType() == Constants.LEGUMES) {
-            EventBus.getDefault().post(new OnSuccessEvent());
+            //EventBus.getDefault().post(new OnSuccessEvent());
 
         } else if (view == textFruits) {
+        */
+        if(view == textFruits){
             ttobj.speak("Fruit", TextToSpeech.QUEUE_FLUSH, null);
 
         } else if (view == textLegumes) {
