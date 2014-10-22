@@ -11,15 +11,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
+import com.si5.camash.fruityco.data.events.OnSuccessEvent;
+import com.si5.camash.fruityco.ui.views.DrawView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import de.greenrobot.event.EventBus;
 
 import static com.si5.camash.fruityco.Utils.Utils.addRandomAliment;
 
@@ -29,11 +34,15 @@ public class Theme3 extends Fragment implements View.OnClickListener {
     private static final int NB_FRUIT_VEGETABLE = 5;
     private TextToSpeech ttobj;
     private ImageView []imgMain1 = new ImageView[NB_FRUIT_VEGETABLE];
-    private ImageView []img1 = new ImageView[NB_FRUIT_VEGETABLE];;
+    private ImageView []img1 = new ImageView[NB_FRUIT_VEGETABLE];
+    private DrawView drawView;
+    private LinearLayout layoutImgMain;
+    private LinearLayout layoutImg;
 
     List<Aliment> aliments = new ArrayList<Aliment>();
     private int [] positionResponse = new int[NB_FRUIT_VEGETABLE];
-
+    private int nbFounded = 0;
+    private int onMovement;
 
     public static Theme3 newInstance() {
         return new Theme3();
@@ -51,8 +60,10 @@ public class Theme3 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        aliments=addRandomAliment(NB_FRUIT_VEGETABLE);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_theme3, container, false);
 
+        aliments=addRandomAliment(NB_FRUIT_VEGETABLE);
         for (int i=0; i<NB_FRUIT_VEGETABLE; i++){
             do {
                 positionResponse[i] = getRandomPosition();
@@ -71,8 +82,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     }
                 });
 
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_theme3, container, false);
+
         findViews(v);
         return v;
     }
@@ -108,6 +118,9 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         img1[3] = (ImageView) v.findViewById(R.id.img4);
         imgMain1[4] = (ImageView) v.findViewById(R.id.imgMain5);
         img1[4] = (ImageView) v.findViewById(R.id.img5);
+        drawView = (DrawView) v.findViewById(R.id.drawView);
+        layoutImg = (LinearLayout)v.findViewById(R.id.layoutImg);
+        layoutImgMain = (LinearLayout)v.findViewById(R.id.layoutImgMain);
 
         // Sets a long click listener for the ImageView using an anonymous listener object that
         // implements the OnLongClickListener interface
@@ -124,6 +137,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         for (int i=0; i<NB_FRUIT_VEGETABLE; i++) {
             img1[i].setImageDrawable(Utils.getResId(getActivity(), aliments.get(i).getName(), aliments.get(i).getType()));
             img1[i].setOnDragListener(new MyDragListener());
+            imgMain1[i].setOnDragListener(new MyDragListener());
         }
 
         //img1[positionResponse].setOnDragListener(new MyDragListener());
@@ -145,7 +159,8 @@ public class Theme3 extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-       /* if (view == img1) {
+        /*
+        if (view == img1) {
 
         } else if (view == img2) {
 
@@ -158,7 +173,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     break;
                 }
             }
-       // }
+        //}
     }
 
 
@@ -178,6 +193,10 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);
                     view.setVisibility(View.INVISIBLE);
+                    onMovement = i;
+                    return true;
+                }else if(motionEvent.getAction() == MotionEvent.ACTION_UP && view == imgMain1[i]){
+                    imgMain1[i].setVisibility(View.VISIBLE);
                     return true;
                 }
             }
@@ -190,31 +209,21 @@ public class Theme3 extends Fragment implements View.OnClickListener {
         @Override
         public boolean onDrag(View v, DragEvent event) {
             boolean isDropInside=false;
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-                    break;
-                case DragEvent.ACTION_DROP:
-                    break;
-                case DragEvent.ACTION_DRAG_ENDED:
-                    if(event.getResult()){
+                if(v==img1[positionResponse[onMovement]] && event.getAction()==DragEvent.ACTION_DROP){
+                    nbFounded++;
+                    float xImageMain = imgMain1[onMovement].getX()+imgMain1[onMovement].getWidth()/2;
+                    float yImageMain = layoutImgMain.getY()+layoutImgMain.getHeight();
+                    float xImage = img1[positionResponse[onMovement]].getX()+img1[positionResponse[onMovement]].getWidth()/2;
+                    float yImage = layoutImg.getY();
 
-                    }else{
-                        for (int i=0; i<NB_FRUIT_VEGETABLE; i++){
-                            if (v == imgMain1[i]){
-                                imgMain1[i].setVisibility(View.VISIBLE);
-                                break;
-                            }
-                        }
-
+                    if(nbFounded == 5) {
+                        EventBus.getDefault().post(new OnSuccessEvent());
                     }
-                    break;
-                default:
-                    break;
-            }
+                    imgMain1[onMovement].setOnTouchListener(null);
+                    drawView.drawLine(xImageMain,yImageMain,xImage,yImage);
+                } else if (event.getAction()==DragEvent.ACTION_DRAG_ENDED){
+                    imgMain1[onMovement].setVisibility(View.VISIBLE);
+                }
             return true;
         }
     }

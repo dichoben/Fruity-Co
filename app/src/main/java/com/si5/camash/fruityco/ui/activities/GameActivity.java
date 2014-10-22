@@ -69,7 +69,8 @@ public class GameActivity extends Activity {
 
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
-            changeMainContent(Theme1.newInstance());
+            //changeMainContent(Theme1.newInstance());
+            changeMainContent(Theme3.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             changeMainContent(Theme2.newInstance());
 
