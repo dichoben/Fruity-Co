@@ -208,7 +208,7 @@ public class Theme3 extends Fragment implements View.OnClickListener {
                     float yImageMain = imgMain1[onMovement].getY();
                     float xImage = img1[positionResponse[onMovement]].getX();
                     float yImage = img1[positionResponse[onMovement]].getY();
-                    
+
                     if(nbFounded == 5) {
                         EventBus.getDefault().post(new OnSuccessEvent());
                     }
