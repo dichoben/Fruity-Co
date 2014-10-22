@@ -70,9 +70,10 @@ public class GameActivity extends Activity {
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
             //changeMainContent(Theme1.newInstance());
-            changeMainContent(Theme3.newInstance());
+            changeMainContent(Theme2.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             changeMainContent(Theme2.newInstance());
+            //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
 
         } else if (currentLvl >= 11 && currentLvl <= 13) {
             changeMainContent(Theme3.newInstance());
@@ -82,8 +83,8 @@ public class GameActivity extends Activity {
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
         }
 
-        lvlText.setText("Niveau " + Integer.toString(currentLvl));
-        //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]);
+        //lvlText.setText("Niveau " + Integer.toString(currentLvl));
+        //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]+" "+statistic[1]+" "+statistic[3]+" "+statistic[4]);
 
     }
 
