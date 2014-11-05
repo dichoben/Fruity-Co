@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.si5.camash.fruityco.R;
 
@@ -14,14 +15,18 @@ public class EndActivity extends Activity {
     private int[][] statistic;
 
 
-    public void onCreate(){
-        //this.statistic = GameActivity.statistic;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
+        Bundle b = getIntent().getExtras();
+        int[] tempStat = b.getIntArray("statistic");
+        ((TextView)findViewById(R.id.resultNiv1)).setText(tempStat[0]+" / "+tempStat[1]);
+        ((TextView)findViewById(R.id.resultNiv2)).setText(tempStat[2]+" / "+tempStat[3]);
+        ((TextView)findViewById(R.id.resultNiv3)).setText(tempStat[4]+" / "+tempStat[5]);
+        ((TextView)findViewById(R.id.resultNiv4)).setText(tempStat[6]+" / "+tempStat[7]);
+        ((TextView)findViewById(R.id.resultNiv5)).setText(tempStat[8]+" / "+tempStat[9]);
+        ((TextView)findViewById(R.id.resultNiv6)).setText(tempStat[10]+" / "+tempStat[11]);
     }
 
 
