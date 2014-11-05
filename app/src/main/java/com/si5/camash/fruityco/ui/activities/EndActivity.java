@@ -1,6 +1,7 @@
 package com.si5.camash.fruityco.ui.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,12 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.si5.camash.fruityco.R;
 
-public class EndActivity extends Activity {
-    private int[][] statistic;
+public class EndActivity extends Activity implements View.OnClickListener{
+    private ImageButton playHome;
 
 
     @Override
@@ -29,6 +31,7 @@ public class EndActivity extends Activity {
         ((TextView)findViewById(R.id.resultNiv4)).setText(tempStat[6]+" / "+(tempStat[6]+tempStat[7]));
         ((TextView)findViewById(R.id.resultNiv5)).setText(tempStat[8]+" / "+(tempStat[8]+tempStat[9]));
         ((TextView)findViewById(R.id.resultNiv6)).setText(tempStat[10]+" / "+(tempStat[10]+tempStat[11]));
+        findViews();
     }
 
 
@@ -49,6 +52,21 @@ public class EndActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void findViews() {
+        playHome = (ImageButton)findViewById( R.id.playHome );
+
+        playHome.setOnClickListener( this );
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if ( v == playHome ) {
+            Intent intent=new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

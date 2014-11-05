@@ -17,16 +17,25 @@
         android:id="@+id/lvlText"
         android:layout_margin="32dp"/>
 
+    <ImageButton
+        android:id="@+id/playHome"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/house"/>
+
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:gravity="center"
+        android:gravity="center|bottom"
         android:orientation="horizontal">
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="900px"
+            android:layout_width="520px"
             android:layout_height="match_parent"
             android:stretchColumns="1">
             <TableRow>
@@ -36,7 +45,7 @@
                 <TextView
                     android:text="Correctes / Total tentatives"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
             </TableRow>
@@ -44,14 +53,14 @@
                 <TextView
                     android:text="Niveau 1 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv1"
                     android:text="5 / 5"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
@@ -60,14 +69,14 @@
                 <TextView
                     android:text="Niveau 2 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv2"
                     android:text="5 / 5"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
@@ -76,14 +85,14 @@
                 <TextView
                     android:text="Niveau 3 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv3"
                     android:text="5 / 5"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
@@ -92,14 +101,14 @@
                 <TextView
                     android:text="Niveau 4 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv4"
                     android:text="5 / 5"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
@@ -108,14 +117,14 @@
                 <TextView
                     android:text="Niveau 5 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv5"
                     android:text="3 / 3"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
@@ -124,14 +133,14 @@
                 <TextView
                     android:text="Niveau 6 : "
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="3dip" />
                 <TextView
                     android:id="@+id/resultNiv6"
                     android:text="3 / 3"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:padding="3dip" />
