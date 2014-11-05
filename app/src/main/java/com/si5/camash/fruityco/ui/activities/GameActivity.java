@@ -114,9 +114,6 @@ public class GameActivity extends Activity {
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             statistic[2]++;
             changeMainContent(Theme2.newInstance());
-            //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
-
-
         } else if (currentLvl >= 11 && currentLvl <= 13) {
             statistic[4]++;
             changeMainContent(Theme3.newInstance());

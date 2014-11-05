@@ -32,6 +32,7 @@
         </activity>
         <activity
             android:name=".ui.activities.EndActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
             android:label="@string/title_activity_end" >
         </activity>
     </application>
