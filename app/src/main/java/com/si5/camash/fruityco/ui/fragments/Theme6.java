@@ -15,6 +15,8 @@ import com.si5.camash.fruityco.R;
 import com.si5.camash.fruityco.Utils.Constants;
 import com.si5.camash.fruityco.Utils.Utils;
 import com.si5.camash.fruityco.data.Aliment;
+import com.si5.camash.fruityco.data.events.MyFailDragListener;
+import com.si5.camash.fruityco.data.events.OnFailEvent;
 import com.si5.camash.fruityco.data.events.OnSuccessEvent;
 import com.si5.camash.fruityco.ui.activities.GameActivity;
 import com.si5.camash.fruityco.ui.adapter.CoverFlowAdapterImage;
@@ -128,7 +130,10 @@ public class Theme6 extends Fragment implements View.OnClickListener {
                         if(answerFound.size()==3){
                             EventBus.getDefault().post(new OnSuccessEvent());
                         }
+                    }else{
+                        EventBus.getDefault().post(new OnFailEvent());
                     }
+
                 }
             }
         });
@@ -143,6 +148,8 @@ public class Theme6 extends Fragment implements View.OnClickListener {
                         if(answerFound.size()==3){
                             EventBus.getDefault().post(new OnSuccessEvent());
                         }
+                    } else {
+                        EventBus.getDefault().post(new OnFailEvent());
                     }
                 }
             }

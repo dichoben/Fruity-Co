@@ -106,9 +106,9 @@ public class GameActivity extends Activity {
         showSuccess();
         currentLvl++;
 
-
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
+            currentLvl=24;
             statistic[0]++;
             changeMainContent(Theme1.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
