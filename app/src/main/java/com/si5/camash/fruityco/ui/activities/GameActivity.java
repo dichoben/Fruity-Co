@@ -125,6 +125,7 @@ public class GameActivity extends Activity {
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
 
         } else if (currentLvl > 23 && currentLvl <=25){
+            statistic[10]++;
             changeMainContent(Theme6.newInstance());
         } else {
             Intent intent=new Intent(this, EndActivity.class);
@@ -174,8 +175,6 @@ public class GameActivity extends Activity {
         } else {
             statistic[11]++;
         }
-        //event.addTentative();
-        //statistic[currentLvl] = event.getTentative();
     }
 
     @Override
