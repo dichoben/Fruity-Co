@@ -5,8 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.si5.camash.fruityco.R;
@@ -21,7 +25,7 @@ import com.si5.camash.fruityco.ui.fragments.Theme4_5;
 import de.greenrobot.event.EventBus;
 
 public class GameActivity extends Activity {
-
+    private MediaPlayer mPlayer = null;
 
     public static String[] listFruits = {"abricot", "ananas", "banane", "cassis", "cerise", "citron", "fraise", "framboise", "grenade", "kiwi", "litchi", "mangue", "melon", "noix", "noix de coco", "orange", "pamplemousse", "pastèque", "pêche", "poire", "pomme", "prune", "raisin"};
     public static String[] listLegumes = {"ail", "artichaut", "asperge", "aubergine", "avocat", "betterave", "brocoli", "carotte", "chou fleur", "chou rouge", "citrouille", "concombre", "courgette", "endive", "haricot", "laitue", "mâche", "ma iss", "oignon", "petit pois", "poireau", "poivron", "pomme de terre", "radis", "tomate"};
@@ -34,6 +38,7 @@ public class GameActivity extends Activity {
 
     private int statistic[] = {0, 0, 0, 0, 0, 0};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class GameActivity extends Activity {
         findViews();
         onEvent(new OnSuccessEvent());
         EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -90,14 +96,26 @@ public class GameActivity extends Activity {
 
     private void showSuccess() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final Dialog dialog = builder.setMessage("YOU WIN").setCancelable(false).create();
+        ImageView imageOk = new ImageView(this);
+        final Dialog dialog = builder.setView(imageOk).create();
+        imageOk.setImageResource(R.drawable.ouibouton);
+        imageOk.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                dialog.dismiss();
+                return true;
+            }
+        });
+        //setMessage("YOU WIN").setCancelable(false).create();
+
         dialog.show();
-        handler.postDelayed(new Runnable() {
+        playSound(R.raw.applause);
+        /*handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 dialog.dismiss();
             }
-        }, 1500);
+        }, 1500);*/
     }
 
     public void onEvent(OnFailEvent event){
@@ -118,4 +136,21 @@ public class GameActivity extends Activity {
         //statistic[currentLvl] = event.getTentative();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mPlayer != null) {
+            mPlayer.stop();
+            mPlayer.release();
+        }
+    }
+
+    private void playSound(int resId) {
+        if(mPlayer != null) {
+            mPlayer.stop();
+            mPlayer.release();
+        }
+        mPlayer = MediaPlayer.create(this, resId);
+        mPlayer.start();
+    }
 }
