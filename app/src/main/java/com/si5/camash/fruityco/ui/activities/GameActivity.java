@@ -106,16 +106,9 @@ public class GameActivity extends Activity {
                 return true;
             }
         });
-        //setMessage("YOU WIN").setCancelable(false).create();
 
         dialog.show();
         playSound(R.raw.applause);
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 1500);*/
     }
 
     public void onEvent(OnFailEvent event){
