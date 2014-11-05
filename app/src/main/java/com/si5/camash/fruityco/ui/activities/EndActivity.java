@@ -2,6 +2,7 @@ package com.si5.camash.fruityco.ui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,13 +21,14 @@ public class EndActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
         Bundle b = getIntent().getExtras();
-        int[] tempStat = b.getIntArray("statistic");
-        ((TextView)findViewById(R.id.resultNiv1)).setText(tempStat[0]+" / "+tempStat[1]);
-        ((TextView)findViewById(R.id.resultNiv2)).setText(tempStat[2]+" / "+tempStat[3]);
-        ((TextView)findViewById(R.id.resultNiv3)).setText(tempStat[4]+" / "+tempStat[5]);
-        ((TextView)findViewById(R.id.resultNiv4)).setText(tempStat[6]+" / "+tempStat[7]);
-        ((TextView)findViewById(R.id.resultNiv5)).setText(tempStat[8]+" / "+tempStat[9]);
-        ((TextView)findViewById(R.id.resultNiv6)).setText(tempStat[10]+" / "+tempStat[11]);
+        int[] tempStat = b.getIntArray("idStat");
+        Log.e("stat", ""+tempStat.length);
+        ((TextView)findViewById(R.id.resultNiv1)).setText(tempStat[0]+" / "+(tempStat[0]+tempStat[1]));
+        ((TextView)findViewById(R.id.resultNiv2)).setText(tempStat[2]+" / "+(tempStat[2]+tempStat[3]));
+        ((TextView)findViewById(R.id.resultNiv3)).setText(tempStat[4]+" / "+(tempStat[4]+tempStat[5]));
+        ((TextView)findViewById(R.id.resultNiv4)).setText(tempStat[6]+" / "+(tempStat[6]+tempStat[7]));
+        ((TextView)findViewById(R.id.resultNiv5)).setText(tempStat[8]+" / "+(tempStat[8]+tempStat[9]));
+        ((TextView)findViewById(R.id.resultNiv6)).setText(tempStat[10]+" / "+(tempStat[10]+tempStat[11]));
     }
 
 

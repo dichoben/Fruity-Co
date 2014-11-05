@@ -86,12 +86,12 @@ public class GameActivity extends Activity {
             changeMainContent(Theme1.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             statistic[2]++;
-            changeMainContent(Theme2.newInstance());
+            //changeMainContent(Theme2.newInstance());
             //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
-            /*
             Intent intent=new Intent(this, EndActivity.class);
             intent.putExtra("idStat", statistic);
-            startActivity(intent);*/
+            startActivity(intent);
+
 
         } else if (currentLvl >= 11 && currentLvl <= 13) {
             statistic[4]++;
