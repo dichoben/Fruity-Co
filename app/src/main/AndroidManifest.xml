@@ -9,9 +9,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.activities.HomeActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:label="@string/app_name" >
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +20,13 @@
         </activity>
         <activity
             android:name=".ui.activities.GameActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/title_activity_game"
             android:screenOrientation="landscape"
-            android:label="@string/title_activity_game" >
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".ui.activities.EndActivity"
+            android:label="@string/title_activity_end" >
         </activity>
     </application>
 

@@ -32,7 +32,7 @@ public class GameActivity extends Activity {
 
     private Handler handler = new Handler();
 
-    private int statistic[] = {0, 0, 0, 0, 0, 0};
+    public int statistic[][] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +70,23 @@ public class GameActivity extends Activity {
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
             //changeMainContent(Theme1.newInstance());
-            changeMainContent(Theme2.newInstance());
+           // changeMainContent(Theme2.newInstance());
+            statistic[0][0]++;
         } else if (currentLvl >= 6 && currentLvl <= 10) {
+            statistic[1][0]++;
             changeMainContent(Theme2.newInstance());
             //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
 
         } else if (currentLvl >= 11 && currentLvl <= 13) {
+            statistic[2][0]++;
             changeMainContent(Theme3.newInstance());
         } else if (currentLvl >= 14 && currentLvl <= 18) {
+            statistic[3][0]++;
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
         } else if (currentLvl >= 19 && currentLvl <= 23) {
+            statistic[4][0]++;
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
+        } else {
         }
 
         //lvlText.setText("Niveau " + Integer.toString(currentLvl));
@@ -102,17 +108,17 @@ public class GameActivity extends Activity {
 
     public void onEvent(OnFailEvent event){
         if (currentLvl >= 0 && currentLvl <= 5) {
-            statistic[0]++;
+            statistic[0][1]++;
         } else if (currentLvl >= 6 && currentLvl <= 10) {
-            statistic[1]++;
+            statistic[1][1]++;
         } else if (currentLvl >= 11 && currentLvl <= 13) {
-            statistic[2]++;
+            statistic[2][1]++;
         } else if (currentLvl >= 14 && currentLvl <= 18) {
-            statistic[3]++;
+            statistic[3][1]++;
         } else if (currentLvl >= 19 && currentLvl <= 23) {
-            statistic[4]++;
+            statistic[4][1]++;
         } else {
-            statistic[5]++;
+            statistic[5][1]++;
         }
         //event.addTentative();
         //statistic[currentLvl] = event.getTentative();
