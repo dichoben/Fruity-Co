@@ -25,6 +25,12 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
+            android:name=".ui.activities.MenuActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/title_activity_menu" >
+        </activity>
+        <activity
             android:name=".ui.activities.EndActivity"
             android:label="@string/title_activity_end" >
         </activity>
