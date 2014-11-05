@@ -16,17 +16,21 @@ import com.si5.camash.fruityco.ui.fragments.Theme1;
 import com.si5.camash.fruityco.ui.fragments.Theme3;
 import com.si5.camash.fruityco.ui.fragments.Theme2;
 import com.si5.camash.fruityco.ui.fragments.Theme4_5;
+import com.si5.camash.fruityco.ui.fragments.Theme6;
 
 
 import de.greenrobot.event.EventBus;
 
 public class GameActivity extends Activity {
 
+    public static String PARAM="lvl";
 
     public static String[] listFruits = {"abricot", "ananas", "banane", "cassis", "cerise", "citron", "fraise", "framboise", "grenade", "kiwi", "litchi", "mangue", "melon", "noix", "noix de coco", "orange", "pamplemousse", "pastèque", "pêche", "poire", "pomme", "prune", "raisin"};
     public static String[] listLegumes = {"ail", "artichaut", "asperge", "aubergine", "avocat", "betterave", "brocoli", "carotte", "chou fleur", "chou rouge", "citrouille", "concombre", "courgette", "endive", "haricot", "laitue", "mâche", "ma iss", "oignon", "petit pois", "poireau", "poivron", "pomme de terre", "radis", "tomate"};
 
     private int currentLvl = 0;
+
+    private boolean firstlaunch=true;
 
     private TextView lvlText;
 
@@ -38,6 +42,28 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Bundle b = getIntent().getExtras();
+        int value = b.getInt(PARAM);
+        switch(value){
+            case 1:
+                currentLvl=0;
+                break;
+            case 2:
+                currentLvl = 5;
+                break;
+            case 3:
+                currentLvl = 10;
+                break;
+            case 4:
+                currentLvl = 13;
+                break;
+            case 5:
+                currentLvl = 18;
+                break;
+            case 6:
+                currentLvl = 22;
+                break;
+        }
         findViews();
         onEvent(new OnSuccessEvent());
         EventBus.getDefault().register(this);
@@ -64,13 +90,13 @@ public class GameActivity extends Activity {
     }
 
     public void onEvent(OnSuccessEvent event) {
-        currentLvl++;
         showSuccess();
+        currentLvl++;
+
 
         //lvl 1 to 5
         if (currentLvl >= 1 && currentLvl <= 5) {
-            //changeMainContent(Theme1.newInstance());
-            changeMainContent(Theme2.newInstance());
+            changeMainContent(Theme1.newInstance());
         } else if (currentLvl >= 6 && currentLvl <= 10) {
             changeMainContent(Theme2.newInstance());
             //changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
@@ -81,26 +107,32 @@ public class GameActivity extends Activity {
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
         } else if (currentLvl >= 19 && currentLvl <= 23) {
             changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
+        } else if (currentLvl > 23 && currentLvl <=25){
+            changeMainContent(Theme6.newInstance());
         }
 
-        //lvlText.setText("Niveau " + Integer.toString(currentLvl));
+        lvlText.setText("Niveau " + Integer.toString(currentLvl));
         //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]+" "+statistic[1]+" "+statistic[3]+" "+statistic[4]);
 
     }
 
     private void showSuccess() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final Dialog dialog = builder.setMessage("YOU WIN").setCancelable(false).create();
-        dialog.show();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 1500);
+        if (!firstlaunch) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final Dialog dialog = builder.setMessage("YOU WIN").setCancelable(false).create();
+            dialog.show();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.dismiss();
+                }
+            }, 1500);
+
+        }
+        firstlaunch=false;
     }
 
-    public void onEvent(OnFailEvent event){
+    public void onEvent(OnFailEvent event) {
         if (currentLvl >= 0 && currentLvl <= 5) {
             statistic[0]++;
         } else if (currentLvl >= 6 && currentLvl <= 10) {
