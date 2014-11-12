@@ -5,7 +5,8 @@ Groupe de projet : Geneviève Cirera - Morgane Perron - Benjamin Volland
 
 ##Présentation
 Dans le cadre du cours de "Conception d'Applications Multimédia pour le Web et les Mobiles", nous avons développé un projet Android adapté pour les enfants atteints de déficience intellectuelle. <br>
-Notre jeu a un but éducatif, il permet de reconnaître les fruits et légumes à l’utilisateur.
+Notre jeu a un but éducatif, il permet de reconnaître les fruits et légumes à l’utilisateur.<br><br>
+Pour cela, il est décomposé en 3 thèmes afin d’apprendre progressivement à l’utilisateur à reconnaître si l’aliment proposé est un fruit ou un légume. Dans chacun des thèmes se trouve plusieurs mini-jeux. Les niveaux 1, 2, 4 et 5 ont cinq questions. Le niveau 3 a trois questions et le dernier niveau a deux questions.
 
 ##Les niveaux
 Six niveaux sont disponibles : 
