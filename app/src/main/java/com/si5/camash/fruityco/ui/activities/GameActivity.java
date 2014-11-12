@@ -24,12 +24,11 @@ import com.si5.camash.fruityco.ui.fragments.Theme4_5;
 import com.si5.camash.fruityco.ui.fragments.Theme6;
 
 
-
 import de.greenrobot.event.EventBus;
 
 public class GameActivity extends Activity {
 
-    public static String PARAM="lvl";
+    public static String PARAM = "lvl";
     private MediaPlayer mPlayer = null;
 
     public static String[] listFruits = {"abricot", "ananas", "banane", "cassis", "cerise", "citron", "fraise", "framboise", "grenade", "kiwi", "litchi", "mangue", "melon", "noix", "noix de coco", "orange", "pamplemousse", "pastèque", "pêche", "poire", "pomme", "prune", "raisin"};
@@ -37,14 +36,16 @@ public class GameActivity extends Activity {
 
     private int currentLvl = 0;
 
-    private boolean firstlaunch=true;
+    private int timeBeforeNExtLvl=0;
+
+    private boolean firstlaunch = true;
 
     private TextView lvlText;
 
     private Handler handler = new Handler();
 
     //public ArrayList <Integer> statistic = new ArrayList<Integer>();
-    private int[] statistic = {0,0,0,0,0,0,0,0,0,0,0,0};
+    private int[] statistic = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +53,9 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
         Bundle b = getIntent().getExtras();
         int value = b.getInt(PARAM);
-        switch(value){
+        switch (value) {
             case 1:
-                currentLvl=0;
+                currentLvl = 0;
                 break;
             case 2:
                 currentLvl = 5;
@@ -103,36 +104,46 @@ public class GameActivity extends Activity {
     }
 
     public void onEvent(OnSuccessEvent event) {
-        showSuccess();
-        currentLvl++;
 
-        //lvl 1 to 5
-        if (currentLvl >= 1 && currentLvl <= 5) {
-            statistic[0]++;
-            changeMainContent(Theme1.newInstance());
-        } else if (currentLvl >= 6 && currentLvl <= 10) {
-            statistic[2]++;
-            changeMainContent(Theme2.newInstance());
-        } else if (currentLvl >= 11 && currentLvl <= 13) {
-            statistic[4]++;
-            changeMainContent(Theme3.newInstance());
-        } else if (currentLvl >= 14 && currentLvl <= 18) {
-            statistic[6]++;
-            changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
-        } else if (currentLvl >= 19 && currentLvl <= 23) {
-            statistic[8]++;
-            changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showSuccess();
+                currentLvl++;
 
-        } else if (currentLvl > 23 && currentLvl <=25){
-            statistic[10]++;
-            changeMainContent(Theme6.newInstance());
-        } else {
-            Intent intent=new Intent(this, EndActivity.class);
-            intent.putExtra("idStat", statistic);
-            startActivity(intent);
-        }
+                //lvl 1 to 5
+                if (currentLvl >= 1 && currentLvl <= 5) {
+                    timeBeforeNExtLvl=0;
+                    statistic[0]++;
+                    changeMainContent(Theme1.newInstance());
+                } else if (currentLvl >= 6 && currentLvl <= 10) {
+                    statistic[2]++;
+                    changeMainContent(Theme2.newInstance());
+                } else if (currentLvl >= 11 && currentLvl <= 13) {
+                    timeBeforeNExtLvl=1500;
+                    statistic[4]++;
+                    changeMainContent(Theme3.newInstance());
+                } else if (currentLvl >= 14 && currentLvl <= 18) {
+                    timeBeforeNExtLvl=0;
+                    statistic[6]++;
+                    changeMainContent(Theme4_5.newInstance(Theme4_5.THEME4));
+                } else if (currentLvl >= 19 && currentLvl <= 23) {
+                    statistic[8]++;
+                    changeMainContent(Theme4_5.newInstance(Theme4_5.THEME5));
 
-        lvlText.setText("Niveau " + Integer.toString(currentLvl));
+                } else if (currentLvl > 23 && currentLvl <= 25) {
+                    timeBeforeNExtLvl=1500;
+                    statistic[10]++;
+                    changeMainContent(Theme6.newInstance());
+                } else {
+                    Intent intent = new Intent(GameActivity.this, EndActivity.class);
+                    intent.putExtra("idStat", statistic);
+                    startActivity(intent);
+                }
+
+                lvlText.setText("Niveau " + Integer.toString(currentLvl));
+            }
+        }, timeBeforeNExtLvl);
         //lvlText.setText("Niveau " + Integer.toString(currentLvl)+" avec "+statistic[0]+" "+statistic[1]+" "+statistic[3]+" "+statistic[4]);
 
     }
@@ -142,6 +153,7 @@ public class GameActivity extends Activity {
         if (!firstlaunch) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             ImageView imageOk = new ImageView(this);
+
             final Dialog dialog = builder.setView(imageOk).create();
             imageOk.setImageResource(R.drawable.ouibouton);
             imageOk.setOnTouchListener(new View.OnTouchListener() {
@@ -152,11 +164,13 @@ public class GameActivity extends Activity {
                 }
             });
 
+
             dialog.show();
             playSound(R.raw.applause);
 
+
         }
-        firstlaunch=false;
+        firstlaunch = false;
 
     }
 
@@ -179,14 +193,14 @@ public class GameActivity extends Activity {
     @Override
     public void onPause() {
         super.onPause();
-        if(mPlayer != null) {
+        if (mPlayer != null) {
             mPlayer.stop();
             mPlayer.release();
         }
     }
 
     private void playSound(int resId) {
-        if(mPlayer != null) {
+        if (mPlayer != null) {
             mPlayer.stop();
             mPlayer.release();
         }
