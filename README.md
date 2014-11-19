@@ -20,15 +20,15 @@ Six niveaux sont disponibles :
 ##Installation
 
 ###Installation via le code source
-1 - Télécharger le zip des sources
-2 - Extraire le répertoire du zip
-3 - Ouvrir Android studio (version 0.8.3 ou plus)
-4 - Dans Android Studio faire File>Import Project  et choisir le répertoir du le projet
-5 - Dans Android Studio faire Build> Make project
-6 - Lancer un Run 
+1 - Télécharger le zip des sources <br>
+2 - Extraire le répertoire du zip <br>
+3 - Ouvrir Android studio (version 0.8.3 ou plus) <br>
+4 - Dans Android Studio faire File>Import Project  et choisir le répertoir du le projet <br>
+5 - Dans Android Studio faire Build> Make project <br>
+6 - Lancer un Run  <br> <br>
 
 ###Installation direct de l'apk
-1 - Ouvrir directement via sa tablette l'apk
+1 - Ouvrir directement via sa tablette l'apk <br>
 
 
 
