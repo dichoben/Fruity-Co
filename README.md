@@ -28,7 +28,7 @@ Six niveaux sont disponibles :
 6 - Lancer un Run  <br> <br>
 
 ###Installation direct de l'apk
-1 - Ouvrir directement via sa tablette l'apk <br>
+1 - Ouvrir directement via sa tablette le fichier fruity.apk<br>
 
 
 
